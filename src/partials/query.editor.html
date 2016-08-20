@@ -1,0 +1,117 @@
+<query-editor-row query-ctrl="ctrl" can-collapse="false" class="predix-timeseries-datasource-query-row">
+	<div class="gf-form-inline">
+
+		<!-- Metric and Alias -->
+		<div class="gf-form">
+			<metric-segment-model property="ctrl.target.metric" get-options="ctrl.getMetrics()" on-change="ctrl.onChangeInternal()" style="width: 300px;"></metric-segment-model>
+		</div>
+		<div class="tight-form">
+			<div class="tight-form-item" style="width: 94px">
+				Alias
+			</div>
+			<input type="text" class="input-xlarge tight-form-input" ng-model="ctrl.target.alias" spellcheck="false" placeholder="metric alias" data-min-length="0" data-items="100" ng-model-onblur ng-model-options="{ debounce: 1000 }" ng-change="ctrl.onChangeInternal()">
+		</div>
+	</div>
+
+	<!-- Filters -->
+	<div class="clearfix"></div>
+	<h4>Filters</h4>
+	<button class="btn btn-inverse" ng-click="ctrl.addAttribute()" ng-hide="datasource.meta.mixed">
+		<i class="fa fa-plus"></i>&nbsp; Add Attribute Filter
+	</button>
+	<div class="tight-form" style="width: 1200px">
+
+		<div ng-repeat="attribute in ctrl.target.attributes track by $index">
+			<ul class="tight-form-list">
+				<li class="tight-form-item">
+					<a class="pointer" tabindex="1" ng-click="ctrl.removeAttribute(attribute.name)">
+						<i class="fa fa-remove"></i>
+					</a>
+				</li>
+			</ul>
+			<ul class="tight-form-list">
+				<li class="tight-form-item query-keyword width-12">
+					Attribute Name:
+				</li>
+				<li class="tight-form-item" style="min-width: 320px">
+					<div>
+						<metric-segment-model css-class="tight-form-input" property="attribute.name" get-options="ctrl.getAttributesForMetric()" on-change="ctrl.onChangeInternal()">
+						</metric-segment-model>
+					</div>
+				</li>
+			</ul>
+			<ul class="tight-form-list">
+				<li class="tight-form-item query-keyword">
+					Value:
+				</li>
+				<li class="tight-form-item">
+					<metric-segment-model css-class="tight-form-input" property="attribute.value" get-options="ctrl.getAttributeValues(attribute.name)" on-change="ctrl.onChangeInternal()">
+					</metric-segment-model>
+				</li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+
+	</div>
+
+	<!-- Aggregations -->
+	<div class="clearfix"></div>
+	<div class="tight-form-container">
+		<h4>Aggregations</h4>
+		<div class="tight-form">
+			<ul class="tight-form-list">
+				<li>
+					<button class="btn btn-inverse" ng-click="ctrl.addAggregation()" ng-hide="datasource.meta.mixed">
+						<i class="fa fa-plus"></i>&nbsp; Range Aggregation
+					</button>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div ng-if="ctrl.target.aggregations && ctrl.target.aggregations.length > 0">
+		<div class="gf-form-inline" ng-repeat="aggregation in ctrl.target.aggregations track by $index">
+			<div class="gf-form">
+				<div class="tight-form-item" style="width: 165px">
+					Aggregation Type:
+				</div>
+				<metric-segment-model css-class="width-24" property="aggregation.type" get-options="ctrl.getAggregationTypes()" on-change="ctrl.onChangeInternal()">
+				</metric-segment-model>
+				<!--
+				<div class="tight-form-item" style="width: 94px">
+					Params:
+				</div>
+				<metric-segment-model property="aggregation.value" get-options="" on-change="ctrl.onChangeInternal()" css-class="width-24">
+				</metric-segment-model>
+				-->
+				<!--
+					Range Aggregators have the following fields
+						sampling: unit (enum) and value (int)
+									Where unit is one of:
+										MILLISECONDS
+										SECONDS
+										MINUTES
+										HOURS
+										DAYS
+										WEEKS
+						align_start_time: boolean
+						align_sampling: boolean
+						start_time: long
+						time_zone: long time zone format (just use UTC)
+				-->
+				<a class="pointer" tabindex="1" ng-click="ctrl.removeAggregation(aggregation.name)">
+					<i class="fa fa-remove"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- Groups -->
+	<div class="tight-form-item" style="width: 94px">
+		Groups
+	</div>
+	<div class="gf-form">
+		<button class="btn btn-inverse" ng-click="ctrl.addAggregation()" ng-hide="datasource.meta.mixed">
+			<i class="fa fa-plus"></i>&nbsp; Group
+		</button>
+	</div>
+</query-editor-row>

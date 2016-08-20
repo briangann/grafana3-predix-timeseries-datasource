@@ -1,0 +1,23 @@
+{
+  "type": "datasource",
+  "name": "Predix Time Series Datasource",
+  "id": "grafana-datasource-predix-timeseries",
+
+  "info": {
+    "description": "Grafana 3.x Datasource Plugin for Predix Time Series",
+    "author": {
+      "name": "Brian Gann (bkgann@gmail.com)",
+      "url": "https://github.com/briangann/grafana3-predix-timeseries-datasource"
+    },
+    "keywords": ["predix", "datasource"],
+    "logos": {
+      "small": "img/Predix_Logo.svg",
+      "large": "img/Predix_Logo.svg"
+    },
+    "version": "0.1.0",
+    "updated": "2016-08-19"
+  },
+
+  "annotations": false,
+  "metrics": true
+}
