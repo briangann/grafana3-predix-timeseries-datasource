@@ -1,0 +1,72 @@
+<h3>Predix Time Series Datasource Configuration</h3>
+
+<div class="editor-row">
+	<div class="section tight-form-container" style="margin-bottom: 20px; width: 1024px">
+		<div class="tight-form">
+			<ul class="tight-form-list">
+				<li class="tight-form-item tight-form-align last" style="width: 155px">
+					Predix TS URL
+					<tip>typically this is https://time-series-store-predix.run.aws-usw02-pr.ice.predix.io</tip>
+				</li>
+				<li class="tight-form-item">
+					<input type="text" class="tight-form-input" style="width: 775px;" ng-model="ctrl.current.jsonData.tsURL" placeholder="https://time-series-store-predix.run.aws-usw02-pr.ice.predix.io" required>
+				</li>
+			</ul>
+			<ul class="tight-form-list">
+				<li class="tight-form-item tight-form-align last" style="width: 155px">
+					Predix Zone ID
+					<tip>The Predix Zone Id of your instance (run: cf env MyApp to get this value)</tip>
+				</li>
+				<li class="tight-form-item last">
+					<input type="text" class="tight-form-input" style="width: 775px;" ng-model="ctrl.current.jsonData.predixZoneId" placeholder="myzoneid" required>
+				</li>
+			</ul>
+			<ul class="tight-form-list">
+				<li class="tight-form-item tight-form-align last" style="width: 155px">
+					UAA URL
+					<tip>The UAA URL of your Predix UAA provider</tip>
+				</li>
+				<li class="tight-form-item last">
+					<input type="text" class="tight-form-input" style="width: 775px;" ng-model="ctrl.current.jsonData.uaacURL" placeholder="https://someaddress.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token" required>
+				</li>
+			</ul>
+			<ul class="tight-form-list">
+				<li class="tight-form-item tight-form-align last" style="width: 155px">
+					Client id and Secret
+					<tip>The clientID and client secret in the format clientID:clientSecret for the UAA provider</tip>
+				</li>
+				<li class="tight-form-item last">
+					<input type="text" class="tight-form-input" style="width: 775px;" ng-model="ctrl.current.jsonData.clientData" placeholder="user:password" required>
+				</li>
+			</ul>
+			<ul class="tight-form-list">
+				<li class="tight-form-item tight-form-align last" style="width: 155px">
+					Response Type
+					<tip>The UAA Response type - usually: token</tip>
+				</li>
+				<li class="tight-form-item last">
+					<input type="text" class="tight-form-input" style="width: 775px;" ng-model="ctrl.current.jsonData.uaacType" placeholder="token" required>
+				</li>
+			</ul>
+			<ul class="tight-form-list">
+				<li class="tight-form-item tight-form-align last" style="width: 155px">
+					Grant Type
+					<tip>The UAA Grant type - usually: client_credentials</tip>
+				</li>
+				<li class="tight-form-item last">
+					<input type="text" class="tight-form-input" style="width: 775px;" ng-model="ctrl.current.jsonData.uaacGrantType" placeholder="client_credentials" required>
+				</li>
+			</ul>
+			<ul class="tight-form-list">
+				<li class="tight-form-item tight-form-align last" style="width: 155px">
+					Origin
+					<tip>This will be put into the Access-Control-Allow-Origin header for CORS compliance</tip>
+				</li>
+				<li class="tight-form-item last">
+					<input type="text" class="tight-form-input" style="width: 775px;" ng-model="ctrl.current.jsonData.uaac_origin" placeholder="http://localhost" required>
+				</li>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
