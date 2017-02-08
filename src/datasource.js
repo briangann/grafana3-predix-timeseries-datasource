@@ -51,10 +51,9 @@ export class PredixTimeSeriesDatasource {
         var _this = this;
         return this.fetchToken(_this).then(function(_this) {
             var query = {
-                "start": "365d-ago",
+                "start": "1d-ago",
                 "end": "1s-ago",
                 "tags": [{
-                    "limit": "1",
                     "name": [metricName]
                 }]
             };
@@ -78,10 +77,9 @@ export class PredixTimeSeriesDatasource {
         var _this = this;
         return this.fetchToken(_this).then(function(_this) {
             var query = {
-                "start": "365d-ago",
+                "start": "1d-ago",
                 "end": "1s-ago",
                 "tags": [{
-                    "limit": "1",
                     "name": [metricName]
                 }]
             };
@@ -318,23 +316,25 @@ export class PredixTimeSeriesDatasource {
                 aQuery.start = options.range.from.valueOf();
                 aQuery.end = options.range.to.valueOf();
                 // now the filters
-                // TODO: implement filters
-                if (typeof target.filters !== undefined) {
+                if (typeof target.attributes !== undefined) {
                     // there are filters defined, loop through them
-                    var filter_list = [];
-                    angular.forEach(target.filters, function(value, key) {
-                        var filter_name = key;
-                        var filter_value = value;
+                    var attributes = {};
+                    angular.forEach(target.attributes, function(attribute) {
+                        var name = attribute.name;
+                        var value = attribute.value;
                         // if the value is empty, skip it
                         if (value.length > 0) {
-                            var aHash = {};
-                            aHash[filter_name] = filter_value;
-                            filter_list.push(aHash);
+                            //var aHash = {};
+                            //aHash[name] = value;
+                            //attribute_list.push(aHash);
+                            attributes[name] = value;
                         }
                     });
-                    if (filter_list.length > 0) {
+                    if (attributes !== null) {
                         // only add filters if some are defined
-                        // aQuery.tags[0].filters = {};
+                        aQuery.tags[0].filters = {};
+                        aQuery.tags[0].filters.attributes = attributes;
+                        console.log(aQuery);
                     }
                 }
                 // Add the query and the target alias
